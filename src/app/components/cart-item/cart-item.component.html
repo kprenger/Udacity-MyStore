@@ -1,0 +1,14 @@
+<img src="{{ cartItem.product.url }}" />
+<div class="cart-item-details">
+  <h3>{{ cartItem.product.name }}</h3>
+  <p>{{ cartItem.product.price }}</p>
+  <p>Amount:</p>
+  <input
+    type="number"
+    value="{{ cartItem.quantity }}"
+    min="0"
+    max="8"
+    [(ngModel)]="cartItem.quantity"
+  />
+  <button (click)="remove()">Remove</button>
+</div>

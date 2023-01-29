@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core'
 
-import { Product } from 'src/app/models/product'
+import { Product } from '../../models/product'
+import { CartService } from '../../services/cart.service'
 
 @Component({
   selector: 'app-product-item',
@@ -9,13 +10,22 @@ import { Product } from 'src/app/models/product'
 })
 export class ProductItemComponent {
   @Input() product: Product
-  quantity = 0
+  quantity = '0'
 
-  constructor() {
+  constructor(private cartService: CartService) {
     this.product = new Product()
   }
 
   addToCart() {
-    alert(`Adding ${this.quantity} ${this.product.name} to cart`)
+    const success = this.cartService.addToCart(
+      this.product,
+      parseInt(this.quantity)
+    )
+
+    if (success) {
+      alert(`Adding ${this.quantity} ${this.product.name} to cart`)
+    } else {
+      alert(`You have too many ${this.product.name} in your cart already!`)
+    }
   }
 }

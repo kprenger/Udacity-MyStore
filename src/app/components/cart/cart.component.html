@@ -1,1 +1,18 @@
-<p>cart works!</p>
+<div *ngIf="cart.length == 0">
+  <h1 class="empty-cart-message" *ngIf="cart.length == 0">
+    Your cart is empty!
+  </h1>
+</div>
+<div *ngIf="cart.length > 0" class="cart-container">
+  <div class="cart-panel">
+    <app-cart-item
+      class="cart-item"
+      *ngFor="let cartItem of cart"
+      [cartItem]="cartItem"
+      (removeItem)="removeItem($event)"
+    ></app-cart-item>
+  </div>
+  <div class="cart-panel">
+    <p>This is where the form will go!</p>
+  </div>
+</div>

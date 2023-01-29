@@ -9,7 +9,8 @@ import { ProductListComponent } from './components/product-list/product-list.com
 import { ProductItemComponent } from './components/product-item/product-item.component'
 import { NavBarComponent } from './components/nav-bar/nav-bar.component'
 import { CartComponent } from './components/cart/cart.component'
-import { ProductDetailComponent } from './components/product-detail/product-detail.component'
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { CartItemComponent } from './components/cart-item/cart-item.component'
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     ProductItemComponent,
     NavBarComponent,
     CartComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CartItemComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
