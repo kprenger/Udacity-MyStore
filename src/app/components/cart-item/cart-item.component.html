@@ -4,11 +4,13 @@
   <p>{{ cartItem.product.price }}</p>
   <p>Amount:</p>
   <input
+    class="number-input"
     type="number"
     value="{{ cartItem.quantity }}"
-    min="0"
+    min="1"
     max="8"
     [(ngModel)]="cartItem.quantity"
+    (input)="update()"
   />
   <button (click)="remove()">Remove</button>
 </div>

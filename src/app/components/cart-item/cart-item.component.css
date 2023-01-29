@@ -10,3 +10,8 @@ img {
   width: 100px;
   border-radius: 10px;
 }
+
+.number-input {
+  width: 80px;
+  text-align: center;
+}

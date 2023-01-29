@@ -16,7 +16,7 @@ export class ProductItemComponent {
     this.product = new Product()
   }
 
-  addToCart() {
+  addToCart(): void {
     const success = this.cartService.addToCart(
       this.product,
       parseInt(this.quantity)

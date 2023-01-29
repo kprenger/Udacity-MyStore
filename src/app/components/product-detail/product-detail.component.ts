@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute, ParamMap } from '@angular/router'
-import { Observable, switchMap } from 'rxjs'
+import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 
 import { CartService } from '../../services/cart.service'
 import { Product } from '../../models/product'
-import { ProductService } from 'src/app/services/product.service'
+import { ProductService } from '../../services/product.service'
 
 @Component({
   selector: 'app-product-detail',
@@ -23,7 +22,7 @@ export class ProductDetailComponent {
     this.product = new Product()
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('id')
     if (productId === null) {
       return
@@ -36,7 +35,7 @@ export class ProductDetailComponent {
     })
   }
 
-  addToCart() {
+  addToCart(): void {
     const success = this.cartService.addToCart(
       this.product,
       parseInt(this.quantity)

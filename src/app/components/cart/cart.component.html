@@ -10,9 +10,79 @@
       *ngFor="let cartItem of cart"
       [cartItem]="cartItem"
       (removeItem)="removeItem($event)"
+      (updateQuantity)="updateQuantity($event)"
     ></app-cart-item>
+    <h1>Total {{ cartTotal }}</h1>
   </div>
-  <div class="cart-panel">
-    <p>This is where the form will go!</p>
+  <div class="cart-panel form-margin">
+    <form #form="ngForm" (ngSubmit)="submitForm()">
+      <p>Full name</p>
+      <input
+        type="text"
+        name="name"
+        placeholder="(minimum 3 characters)"
+        required
+        minlength="3"
+        [(ngModel)]="name"
+        #fullName="ngModel"
+      />
+      <br />
+      <br />
+      <p>Address</p>
+      <input
+        type="text"
+        name="address"
+        placeholder="(minimum 6 characters)"
+        required
+        minlength="6"
+        [(ngModel)]="address"
+        #addressField="ngModel"
+      />
+      <br />
+      <br />
+      <p>Credit card number</p>
+      <input
+        type="text"
+        name="creditCardNumber"
+        placeholder="(16-digit number)"
+        required
+        minlength="16"
+        maxlength="16"
+        [(ngModel)]="creditCardNumber"
+        #creditCard="ngModel"
+      />
+      <br />
+      <br />
+      <br />
+      <input type="submit" [disabled]="form.invalid" value="Purchase" />
+    </form>
+    <div *ngIf="form.invalid">
+      <div *ngIf="fullName.dirty">
+        <div *ngIf="fullName.errors?.['required']">
+          Please enter your full name.
+        </div>
+        <div *ngIf="fullName.errors?.['minlength']">
+          Your full name must be at least 3 characters.
+        </div>
+      </div>
+      <div *ngIf="addressField.dirty">
+        <div *ngIf="addressField.errors?.['required']">
+          Please enter your address.
+        </div>
+        <div *ngIf="addressField.errors?.['minlength']">
+          Your address must be at least 6 characters.
+        </div>
+      </div>
+      <div *ngIf="creditCard.dirty">
+        <div *ngIf="creditCard.errors?.['required']">
+          Please enter your credit card number.
+        </div>
+        <div
+          *ngIf="creditCard.errors?.['minlength'] || creditCard.errors?.['maxlength']"
+        >
+          Your credit card number must be 16 characters.
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
-import { CartItem } from 'src/app/models/cartItem'
-import { Product } from 'src/app/models/product'
+
+import { CartItem } from '../../models/cartItem'
+import { Product } from '../../models/product'
 
 @Component({
   selector: 'app-cart-item',
@@ -14,7 +15,12 @@ export class CartItemComponent {
     this.cartItem = { quantity: 0, product: new Product() }
   }
 
+  @Output() updateQuantity: EventEmitter<CartItem> = new EventEmitter()
   @Output() removeItem: EventEmitter<CartItem> = new EventEmitter()
+
+  update(): void {
+    this.updateQuantity.emit(this.cartItem)
+  }
 
   remove(): void {
     this.removeItem.emit(this.cartItem)

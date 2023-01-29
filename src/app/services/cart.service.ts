@@ -42,14 +42,16 @@ export class CartService {
     return true
   }
 
-  updateItemQuantity(product: Product, quantity: number): void {
+  updateItemQuantity(product: Product, quantity: number): CartItem[] {
     const existingCartItem = this.cart.find(
-      (item) => (item.product.id = product.id)
+      (item) => item.product.id == product.id
     )
 
     if (existingCartItem) {
       existingCartItem.quantity = quantity
     }
+
+    return this.cart
   }
 
   removeFromCart(product: Product): CartItem[] {
@@ -61,6 +63,11 @@ export class CartService {
       this.cart.splice(existingCartItemIndex, 1)
     }
 
+    return this.cart
+  }
+
+  clearCart(): CartItem[] {
+    this.cart = []
     return this.cart
   }
 }
