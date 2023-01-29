@@ -1,4 +1,7 @@
-<div class="detail-container">
+<div *ngIf="product.id < 0">
+  <h1>Your item details were not found.</h1>
+</div>
+<div *ngIf="product.id >= 0" class="detail-container">
   <img class="product-image" src="{{ product.url }}" alt="{{ product.name }}" />
   <div class="detail-item">
     <h1>{{ product.name }}</h1>
@@ -14,7 +17,7 @@
           {{ val }}
         </option></select
       >&nbsp;&nbsp;
-      <button type="submit" [disabled]="quantity == 0">Add to Cart</button>
+      <button type="submit" [disabled]="quantity == '0'">Add to Cart</button>
     </form>
     <br />
     <a routerLink="/" class="back-link">Back to Product List</a>
