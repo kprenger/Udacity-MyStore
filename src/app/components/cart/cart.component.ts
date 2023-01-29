@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { Router } from '@angular/router'
 
 import { CartItem } from '../../models/cartItem'
 import { CartService } from '../../services/cart.service'
@@ -15,7 +16,7 @@ export class CartComponent {
   creditCardNumber = 0
   cartTotal = 0
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService, private router: Router) {
     this.cart = []
   }
 
@@ -45,5 +46,6 @@ export class CartComponent {
 
   submitForm(): void {
     this.cart = this.cartService.clearCart()
+    this.router.navigate(['/confirmation'])
   }
 }
