@@ -46,6 +46,9 @@ export class CartComponent {
 
   submitForm(): void {
     this.cart = this.cartService.clearCart()
-    this.router.navigate(['/confirmation'])
+    this.router.navigate([
+      '/confirmation',
+      { name: this.name, total: this.cartTotal }
+    ])
   }
 }
