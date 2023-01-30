@@ -14,7 +14,7 @@ export class CartComponent {
   name = ''
   address = ''
   creditCardNumber = 0
-  cartTotal = 0
+  cartTotal = ''
 
   constructor(private cartService: CartService, private router: Router) {
     this.cart = []
@@ -32,7 +32,7 @@ export class CartComponent {
       0
     )
 
-    this.cartTotal = Math.round(total * 100) / 100
+    this.cartTotal = (Math.round(total * 100) / 100).toFixed(2)
   }
 
   updateQuantity(item: CartItem): void {
@@ -42,6 +42,7 @@ export class CartComponent {
 
   removeItem(item: CartItem): void {
     this.cart = this.cartService.removeFromCart(item.product)
+    this.updateCartTotal()
   }
 
   submitForm(): void {

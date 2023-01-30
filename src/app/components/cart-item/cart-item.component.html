@@ -1,7 +1,7 @@
 <img src="{{ cartItem.product.url }}" />
 <div class="cart-item-details">
   <h3>{{ cartItem.product.name }}</h3>
-  <p>{{ cartItem.product.price }}</p>
+  <p>${{ cartItem.product.price }}</p>
   <p>Amount:</p>
   <input
     class="number-input"
@@ -10,7 +10,7 @@
     min="1"
     max="8"
     [(ngModel)]="cartItem.quantity"
-    (input)="update()"
+    (ngModelChange)="update()"
   />
   <button (click)="remove()">Remove</button>
 </div>

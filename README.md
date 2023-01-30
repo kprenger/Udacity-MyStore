@@ -15,3 +15,4 @@ This project is part of the Udacity Full Stack JavaScript Developer Nanodegree. 
 2. Run `npm install` to install the necessary packages.
 3. Run `ng serve` to run the web server locally.
 4. Once successfully running, navigate to `http://localhost:4200/` in your browser of choice.
+   - I built and tested with Google Chrome Version 109.0.5414.87.

@@ -12,7 +12,7 @@
       (removeItem)="removeItem($event)"
       (updateQuantity)="updateQuantity($event)"
     ></app-cart-item>
-    <h1>Total {{ cartTotal }}</h1>
+    <h1>Total ${{ cartTotal }}</h1>
   </div>
   <div class="cart-panel form-margin">
     <form #form="ngForm" (ngSubmit)="submitForm()">

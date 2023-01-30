@@ -23,12 +23,17 @@ export class ProductDetailComponent {
   }
 
   ngOnInit(): void {
-    const productId = this.route.snapshot.paramMap.get('id')
-    if (productId === null) {
-      return
-    }
+    this.route.params.subscribe((params) => {
+      const productId = params['id']
+      console.log(params)
+      if (productId !== null) {
+        this.getProduct(productId)
+      }
+    })
+  }
 
-    this.productService.getProduct(productId).subscribe((res) => {
+  getProduct(id: number) {
+    this.productService.getProduct(id).subscribe((res) => {
       if (res) {
         this.product = res
       }
