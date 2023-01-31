@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: 'products', component: ProductListComponent },
   { path: 'cart', component: CartComponent },
   { path: 'confirmation', component: ConfirmationComponent },
-  { path: '', redirectTo: '/products', pathMatch: 'full' }
+  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  { path: '**', redirectTo: '/products' }
 ]
 
 @NgModule({

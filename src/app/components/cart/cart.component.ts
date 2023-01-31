@@ -13,7 +13,7 @@ export class CartComponent {
   cart: CartItem[]
   name = ''
   address = ''
-  creditCardNumber = 0
+  creditCardNumber!: number
   cartTotal = ''
 
   constructor(private cartService: CartService, private router: Router) {
@@ -43,6 +43,7 @@ export class CartComponent {
   removeItem(item: CartItem): void {
     this.cart = this.cartService.removeFromCart(item.product)
     this.updateCartTotal()
+    alert(`This will remove ${item.product.name} from your cart.`)
   }
 
   submitForm(): void {

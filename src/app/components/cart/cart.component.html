@@ -46,6 +46,7 @@
         name="creditCardNumber"
         placeholder="(16-digit number)"
         required
+        pattern="[0-9]*"
         minlength="16"
         maxlength="16"
         [(ngModel)]="creditCardNumber"
@@ -80,7 +81,10 @@
         <div
           *ngIf="creditCard.errors?.['minlength'] || creditCard.errors?.['maxlength']"
         >
-          Your credit card number must be 16 characters.
+          Your credit card number must be 16 numbers.
+        </div>
+        <div *ngIf="creditCard.errors?.['pattern']">
+          Your credit card number must be only numbers.
         </div>
       </div>
     </div>
