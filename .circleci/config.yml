@@ -10,10 +10,10 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
       - aws-cli/setup
-    persist_to_workspace:
-      root: ~/project
-      paths:
-        - .
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
   lint:
     executor: node/default
     steps:
@@ -35,10 +35,10 @@ jobs:
           name: Build app
           command: |
             npm run build
-    persist_to_workspace:
-      root: ~/project
-      paths:
-        - .
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
   deploy:
     executor: node/default
     steps:
