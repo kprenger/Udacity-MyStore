@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prettier": "prettier --config .prettierrc 'src/**/*.ts' --write",
-    "eslint": "eslint 'src/**/*.ts'"
+    "eslint": "eslint 'src/**/*.ts'",
+    "deploy": "chmod +x bin/deploy.sh && bin/deploy.sh"
   },
   "private": true,
   "dependencies": {
