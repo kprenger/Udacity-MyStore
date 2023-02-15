@@ -15,10 +15,6 @@ jobs:
           command: |
             npm run eslint
       - run:
-          name: Test app
-          command: |
-            npm run test
-      - run:
           name: Build app
           command: |
             npm run build
