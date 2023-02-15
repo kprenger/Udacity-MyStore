@@ -3,45 +3,25 @@ orbs:
   node: circleci/node@5.1.0
   aws-cli: circleci/aws-cli@3.1.4
 jobs:
-  install:
+  build_test_deploy:
     executor: node/default
     steps:
       - checkout
       - node/install-packages:
           pkg-manager: npm
       - aws-cli/setup
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - .
-  lint:
-    executor: node/default
-    steps:
       - run:
           name: Lint app
           command: |
             npm run eslint
-  test:
-    executor: node/default
-    steps:
       - run:
           name: Test app
           command: |
             npm run test
-  build:
-    executor: node/default
-    steps:
       - run:
           name: Build app
           command: |
             npm run build
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - .
-  deploy:
-    executor: node/default
-    steps:
       - run:
           name: Deploy app
           command: |
@@ -50,20 +30,7 @@ jobs:
 workflows:
   full_pipeline:
     jobs:
-      - install
-      - lint:
-          requires:
-            - install
-      - test:
-          requires:
-            - install
-      - build:
-          requires:
-            - lint
-            - test
-      - deploy:
-          requires:
-            - build
+      - build_test_deploy:
           filters:
             branches:
               only: main
