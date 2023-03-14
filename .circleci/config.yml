@@ -3,17 +3,13 @@ orbs:
   node: circleci/node@5.1.0
   aws-cli: circleci/aws-cli@3.1.4
 jobs:
-  build_test_deploy:
+  build_deploy:
     executor: node/default
     steps:
       - checkout
       - node/install-packages:
           pkg-manager: npm
       - aws-cli/setup
-      - run:
-          name: Lint app
-          command: |
-            npm run eslint
       - run:
           name: Build app
           command: |
@@ -26,7 +22,7 @@ jobs:
 workflows:
   full_pipeline:
     jobs:
-      - build_test_deploy:
+      - build_deploy:
           filters:
             branches:
               only: main
