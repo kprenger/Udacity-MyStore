@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core'
+import { Observable } from 'rxjs'
+import { HttpClient } from '@angular/common/http'
 
+import { Cart } from '../models/cart'
 import { CartItem } from '../models/cartItem'
 import { Product } from '../models/product'
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -9,61 +13,59 @@ import { Product } from '../models/product'
 export class CartService {
   cart: CartItem[]
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.cart = []
   }
 
-  getCart(): CartItem[] {
-    console.log(this.cart)
-    return this.cart
+  options = {
+    headers: {
+      Authorization: `Bearer ${environment.jwt}`
+    }
   }
 
-  addToCart(product: Product, quantity: number): boolean {
-    const existingCartItem = this.cart.find(
-      (item) => item.product.id == product.id
+  getCart(): Observable<Cart> {
+    return this.http.get<Cart>(
+      `${environment.apiUrl}/api/users/1/orders/current`,
+      this.options
     )
-
-    if (existingCartItem) {
-      const newQuantity = existingCartItem.quantity + quantity
-
-      if (newQuantity > 8) {
-        return false
-      }
-
-      existingCartItem.quantity = newQuantity
-    } else {
-      const newItem: CartItem = {
-        quantity: quantity,
-        product: product
-      }
-      this.cart.push(newItem)
-    }
-
-    return true
   }
 
-  updateItemQuantity(product: Product, quantity: number): CartItem[] {
-    const existingCartItem = this.cart.find(
-      (item) => item.product.id == product.id
-    )
-
-    if (existingCartItem) {
-      existingCartItem.quantity = quantity
+  addToCart(product: Product, quantity: number): Observable<Cart> {
+    const body = {
+      productId: product.id,
+      quantity: quantity
     }
 
-    return this.cart
+    return this.http.post<Cart>(
+      `${environment.apiUrl}/api/users/1/orders/add`,
+      body,
+      this.options
+    )
   }
 
-  removeFromCart(product: Product): CartItem[] {
-    const existingCartItemIndex = this.cart.findIndex(
-      (item) => item.product.id == product.id
-    )
-
-    if (existingCartItemIndex !== undefined) {
-      this.cart.splice(existingCartItemIndex, 1)
+  updateItemQuantity(product: Product, quantity: number): Observable<Cart> {
+    const body = {
+      productId: product.id,
+      quantity: quantity
     }
 
-    return this.cart
+    return this.http.post<Cart>(
+      `${environment.apiUrl}/api/users/1/orders/update`,
+      body,
+      this.options
+    )
+  }
+
+  removeFromCart(product: Product): Observable<Cart> {
+    const body = {
+      productId: product.id
+    }
+
+    return this.http.post<Cart>(
+      `${environment.apiUrl}/api/users/1/orders/remove`,
+      body,
+      this.options
+    )
   }
 
   clearCart(): CartItem[] {

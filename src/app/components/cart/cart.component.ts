@@ -21,8 +21,10 @@ export class CartComponent {
   }
 
   ngOnInit(): void {
-    this.cart = this.cartService.getCart()
-    this.updateCartTotal()
+    this.cartService.getCart().subscribe((res) => {
+      this.cart = res.products
+      this.updateCartTotal()
+    })
   }
 
   updateCartTotal(): void {
@@ -36,14 +38,20 @@ export class CartComponent {
   }
 
   updateQuantity(item: CartItem): void {
-    this.cart = this.cartService.updateItemQuantity(item.product, item.quantity)
-    this.updateCartTotal()
+    this.cartService
+      .updateItemQuantity(item.product, item.quantity)
+      .subscribe((res) => {
+        this.cart = res.products
+        this.updateCartTotal()
+      })
   }
 
   removeItem(item: CartItem): void {
-    this.cart = this.cartService.removeFromCart(item.product)
-    this.updateCartTotal()
-    alert(`This will remove ${item.product.name} from your cart.`)
+    this.cartService.removeFromCart(item.product).subscribe((res) => {
+      this.cart = res.products
+      this.updateCartTotal()
+      alert(`This will remove ${item.product.name} from your cart.`)
+    })
   }
 
   submitForm(): void {

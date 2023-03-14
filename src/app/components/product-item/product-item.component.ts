@@ -17,15 +17,11 @@ export class ProductItemComponent {
   }
 
   addToCart(): void {
-    const success = this.cartService.addToCart(
-      this.product,
-      parseInt(this.quantity)
-    )
-
-    if (success) {
-      alert(`Adding ${this.quantity} ${this.product.name} to cart`)
-    } else {
-      alert(`You have too many ${this.product.name} in your cart already!`)
-    }
+    this.cartService
+      .addToCart(this.product, parseInt(this.quantity))
+      .subscribe((res) => {
+        console.log(res)
+        alert(`Adding ${this.quantity} ${this.product.name} to cart`)
+      })
   }
 }
